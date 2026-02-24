@@ -520,15 +520,45 @@ body.locked{overflow:hidden}
   border-radius:12px;overflow:hidden;
   box-shadow:0 10px 45px rgba(200,120,128,.18);
 }
-.video-embed-wrap{
-  position:relative;width:100%;
-  padding-bottom:56.25%;
-  height:0;
+.video-card{
+  position:relative;width:100%;padding-bottom:56.25%;height:0;
+  background:linear-gradient(145deg,#2a0a14,#1a0820,#0e0518);
+  cursor:pointer;overflow:hidden;
 }
-.video-embed-wrap iframe{
-  position:absolute;top:0;left:0;
-  width:100%;height:100%;
-  border:none;display:block;
+.video-card::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 30% 40%,rgba(200,80,100,.18) 0%,transparent 65%),
+    radial-gradient(ellipse 60% 50% at 75% 65%,rgba(120,60,180,.12) 0%,transparent 60%);
+}
+.video-card-inner{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;
+  transition:transform .3s ease;
+}
+.video-card:hover .video-card-inner{ transform:scale(1.03); }
+.video-play-btn{
+  width:82px;height:82px;border-radius:50%;
+  background:linear-gradient(135deg,var(--petal),#a05060);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:2rem;padding-left:6px;
+  box-shadow:0 0 0 0 rgba(200,120,128,.5);
+  animation:playPulse 2.2s ease-in-out infinite;
+  transition:transform .2s;
+}
+.video-card:hover .video-play-btn{ transform:scale(1.1); }
+@keyframes playPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(200,120,128,.5)}
+  50%{box-shadow:0 0 0 20px rgba(200,120,128,0)}
+}
+.video-card-label{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  color:rgba(240,196,196,.75);font-size:clamp(.95rem,2.5vw,1.15rem);
+  letter-spacing:.04em;text-align:center;padding:0 1rem;
+}
+.video-card-sub{
+  font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(200,120,128,.45);margin-top:-.6rem;
 }
 
 .video-cta{
@@ -952,16 +982,15 @@ Se que hace mucho que no nos vemos, y ahora menos con eso que los dos ya estamos
       </div>
       <div class="video-body">
         <div class="video-embed-outer">
-          <div class="video-embed-wrap">
-            <iframe
-              src="https://drive.google.com/file/d/15_l8CkN3u2VeX06zPdxgZYNACm1hh0oW/preview"
-              allow="autoplay"
-              allowfullscreen>
-            </iframe>
+          <div class="video-card" id="video-card" onclick="window.open('https://drive.google.com/file/d/15_l8CkN3u2VeX06zPdxgZYNACm1hh0oW/view?usp=drive_link','_blank')">
+            <div class="video-card-inner">
+              <div class="video-play-btn">▶</div>
+              <p class="video-card-label">Toca para ver tu video especial</p>
+              <p class="video-card-sub">✦ Solo para ti ✦</p>
+            </div>
           </div>
         </div>
-        <a class="video-cta" href="https://drive.google.com/file/d/15_l8CkN3u2VeX06zPdxgZYNACm1hh0oW/view?usp=drive_link" target="_blank">🎬 &nbsp;Ver en pantalla completa</a>
-        <p class="video-note">* Si el video no carga aquí, haz clic en el botón de arriba</p>
+
       </div>
     </div>
   </div>
